@@ -1,0 +1,20 @@
+while wait(0) do
+	if #workspace.PlayerZonesFolder:GetChildren() > 0 then
+		local count = 0
+		for i, v in pairs(workspace.PlayerZonesFolder:GetChildren()) do
+			for z, x in pairs(game.Players:GetPlayers()) do
+				if x.UserId == tonumber(v.Name) then
+					if x.Character.HumanoidRootPart.Position.X > 150 then
+						count += 1
+					end
+				end
+			end
+		end
+		if count == 2 then
+			if workspace.PlayerZonesFolder:FindFirstChild(game.Players.LocalPlayer.UserId) ~= nil and #workspace.PlayerZonesFolder:FindFirstChild(game.Players.LocalPlayer.UserId).Blocks:GetChildren() > 45 then
+				game:GetService("ReplicatedStorage").PlayerDiedEvent:FireServer()
+			end
+		end
+
+	end
+end
